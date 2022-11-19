@@ -1,5 +1,17 @@
 <?php
 
+date_default_timezone_set('America/Phoenix');
+
+
+require_once (dirname(_FILE_) . '/vendor/autoload.php');
+use Monolog\Level1;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
+//create a log channel
+$log = new Logger('Lunaris_Admin');
+$log->pushHandler(new StreamHandler(_DIR_ . '/LunarisTechAdmin.log', Logger::DEBUG));
+
 require_once "db_connect.php";
     
 // Define variables and initialize with empty values
@@ -93,9 +105,11 @@ if($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"]) && !empty($_GET["id
             if($stmt->execute()){
                 // Redirect to login page
                 header("location: index.php");
+                $log->info('The selected employee data has been successfully updated.');
             } else{
                 printf("Error: %s.\n", $stmt->error);
                 echo "Oops! Something went wrong. Insert failed to the database.";
+                $log->error('The selected employee data could not be updated.');
             }
             
             // Close statement

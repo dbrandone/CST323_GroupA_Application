@@ -1,11 +1,23 @@
 <html>
 <?php
-// Initialize the session
-session_start();
+
+date_default_timezone_set('America/Phoenix');
+
+
+require_once (dirname(_FILE_) . '/vendor/autoload.php');
+use Monolog\Level1;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
+//create a log channel
+$log = new Logger('Lunaris_Admin');
+$log->pushHandler(new StreamHandler(_DIR_ . '/LunarisTechAdmin.log', Logger::DEBUG));
+
  
 // Check if the user is already logged in, if yes then redirect him to index page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location: index.php");
+    $log->info('the user already has an active session. Proceeding to the index page.');
     exit;
 }
  
@@ -66,16 +78,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             
                             // Redirect user to welcome page
                             header("location: index.php");
+                            $log->info('The user was logged in successfully.');
                         } else{
                             // Password is not valid, display a generic error message
                             printf("Error: %s.\n", $stmt->error);
                             $login_err = "Password is incorrect.";
+                            $log->error('The user could not be logged in because of an incorrect password.');
                         }
                     }
                 } else{
                     // Username doesn't exist, display a generic error message
                     $login_err = "Incorrect number of users.";
                     printf("Error: %s.\n", $stmt->error);
+                    $log->error('The user could not be logged in because of an incorrect username.');
                 }
             } else{
                 printf("Error: %s.\n", $stmt->error);

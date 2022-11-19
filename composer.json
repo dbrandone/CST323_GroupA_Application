@@ -1,0 +1,6 @@
+{
+	"name" : "cst323_groupa_application/cst323_groupa_application",
+	"require" : {
+		"monolog/monolog" : "2.8.0"
+	}
+}

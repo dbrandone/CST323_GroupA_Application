@@ -1,4 +1,17 @@
 <?php
+
+date_default_timezone_set('America/Phoenix');
+
+
+require_once (dirname(_FILE_) . '/vendor/autoload.php');
+use Monolog\Level1;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
+//create a log channel
+$log = new Logger('Lunaris_Admin');
+$log->pushHandler(new StreamHandler(_DIR_ . '/LunarisTechAdmin.log', Logger::DEBUG));
+
 // Include config file
 require_once "db_connect.php";
  
@@ -120,9 +133,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             if($stmt->execute()){
                 // Redirect to login page
                 header("location: login.php");
+                $log->info('user was created in the database.');
             } else{
                 printf("Error: %s.\n", $stmt->error);
                 echo "Oops! Something went wrong. Insert failed to the database.";
+                $log->error('user registration was unsuccessful.');
             }
 
             // Close statement

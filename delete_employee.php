@@ -1,9 +1,21 @@
 <?php
 
-session_start();
+date_default_timezone_set('America/Phoenix');
+
+
+require_once (dirname(_FILE_) . '/vendor/autoload.php');
+use Monolog\Level1;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
+//create a log channel
+$log = new Logger('Lunaris_Admin');
+$log->pushHandler(new StreamHandler(_DIR_ . '/LunarisTechAdmin.log', Logger::DEBUG));
+
 
 if (! $_SESSION["loggedin"]) {
     echo "Only logged in users may access this page. Click <a href='login.php'here</a> to login<br>";
+    $log->info('user session has been verified.');
     exit;
 }
 
@@ -27,10 +39,12 @@ if(isset($_GET["id"]) && !empty($_GET["id"])){
             // Records deleted successfully. Redirect to landing page
            header("location: index.php");
             printf("Error: %s.\n" , $param_employee_id);
+            $log->info('the selected employee has been removed from the database.');
             exit();
         } else{
             printf("Error: %s.\n", $stmt->error);
             echo "Oops! Something went wrong. Please try again later.";
+            $log->error('the selected employee could not be removed from the database.');
         } 
  
     

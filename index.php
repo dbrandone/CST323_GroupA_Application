@@ -1,5 +1,17 @@
 <?php
-session_start();
+date_default_timezone_set('America/Phoenix');
+
+
+require_once (dirname(_FILE_) . '/vendor/autoload.php');
+use Monolog\Level1;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
+//create a log channel
+$log = new Logger('Lunaris_Admin');
+$log->pushHandler(new StreamHandler(_DIR_ . '/LunarisTechAdmin.log', Logger::DEBUG));
+
+
 if($_SESSION["loggedin"] != true){
     header("location: login.php");
 }
