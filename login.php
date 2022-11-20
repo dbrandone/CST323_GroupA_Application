@@ -11,6 +11,7 @@ use Monolog\Handler\StreamHandler;
 //create a log channel
 $log = new Logger('Lunaris_Admin');
 $log->pushHandler(new StreamHandler(_DIR_ . '/CST323GroupAEmployeeApplication.log', Logger::DEBUG));
+echo("<script>console.log('made it to the login page');</script>");
 
  
 // Check if the user is already logged in, if yes then redirect him to index page
