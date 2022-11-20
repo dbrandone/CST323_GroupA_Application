@@ -16,7 +16,7 @@ $log->pushHandler(new StreamHandler(_DIR_ . '/CST323GroupAEmployeeApplication.lo
  
 // Check if the user is already logged in, if yes then redirect him to index page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: delete_employee.php");
+    header("location: index.php");
     $log->info('the user already has an active session. Proceeding to the index page.');
     exit;
 }
