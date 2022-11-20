@@ -11,7 +11,7 @@ use Monolog\Handler\StreamHandler;
 $log = new Logger('Lunaris_Admin');
 $log->pushHandler(new StreamHandler(_DIR_ . '/CST323GroupAEmployeeApplication.log', Logger::DEBUG));
 $log->notice($message);
-echo("<script>console.log('made it to the page');</script>");
+error_log("<script>console.log('made it to the page');</script>");
 
 if($_SESSION["loggedin"] != true){
     $log->error('user was not logged in, rerout to login.php Auto login redirect. Attemted access to the index.php');

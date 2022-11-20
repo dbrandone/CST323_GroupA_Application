@@ -11,8 +11,8 @@ use Monolog\Handler\StreamHandler;
 //create a log channel
 $log = new Logger('Lunaris_Admin');
 $log->pushHandler(new StreamHandler(_DIR_ . '/CST323GroupAEmployeeApplication.log', Logger::DEBUG));
-echo("<script>console.log('made it to the login page');</script>");
-
+error_log("<script>console.log('made it to the login page');</script>");
+error_log('SLKDKJFKR');
  
 // Check if the user is already logged in, if yes then redirect him to index page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
@@ -50,11 +50,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($user_name_err) && empty($password_err)){
         // Prepare a select statement
         $sql = "SELECT admin_id, user_name, password FROM admin WHERE user_name = ?";
-        
+        error_log("<script>console.log('made it to the sql query SELECT');</script>");
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
             $stmt->bind_param("s", $param_user_name);
-            
+            error_log("<script>console.log('made it to the');</script>");
             // Set parameters
             $param_user_name = $user_name;
             
@@ -93,12 +93,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $login_err = "Incorrect number of users.";
                     printf("Error: %s.\n", $stmt->error);
                     $log->error('The user could not be logged in because of an incorrect username.');
-                    echo("<script>console.log('The user could not be logged in because of an incorrect username.');</script>");
+                    error_log("<script>console.log('The user could not be logged in because of an incorrect username.');</script>");
                 }
             } else{
                 printf("Error: %s.\n", $stmt->error);
                 echo "Oops! Something went wrong. Select query error.";
-                echo("<script>console.log('Oops! Something went wrong. Select query error.');</script>");
+                error_log("<script>console.log('Oops! Something went wrong. Select query error.');</script>");
             }
 
             // Close statement
