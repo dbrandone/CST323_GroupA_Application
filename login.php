@@ -13,7 +13,7 @@ use Monolog\Handler\StreamHandler;
 $log = new Logger('Lunaris_Admin');
 $log->pushHandler(new StreamHandler(_DIR_ . '/LunarisTechAdmin.log', Logger::DEBUG));
 
- session_start();
+ 
 // Check if the user is already logged in, if yes then redirect him to index page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location: index.php");
