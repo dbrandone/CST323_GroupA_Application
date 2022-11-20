@@ -18,7 +18,7 @@ $log->pushHandler(new StreamHandler(_DIR_ . '/CST323GroupAEmployeeApplication.lo
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location: index.php");
     $log->info('the user already has an active session. Proceeding to the index page.');
-    exit();
+    //exit;
 }
  
 // Include config file
