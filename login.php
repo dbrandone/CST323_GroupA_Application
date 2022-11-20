@@ -1,4 +1,3 @@
-<html>
 <?php
 
 /**date_default_timezone_set('America/Phoenix');
@@ -78,19 +77,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             
                             // Redirect user to welcome page
                             header("location: index.php");
-                            $log->info('The user was logged in successfully.');
+                            //$log->info('The user was logged in successfully.');
                         } else{
                             // Password is not valid, display a generic error message
                             printf("Error: %s.\n", $stmt->error);
                             $login_err = "Password is incorrect.";
-                            $log->error('The user could not be logged in because of an incorrect password.');
+                            //$log->error('The user could not be logged in because of an incorrect password.');
                         }
                     }
                 } else{
                     // Username doesn't exist, display a generic error message
                     $login_err = "Incorrect number of users.";
                     printf("Error: %s.\n", $stmt->error);
-                    $log->error('The user could not be logged in because of an incorrect username.');
+                    //$log->error('The user could not be logged in because of an incorrect username.');
                 }
             } else{
                 printf("Error: %s.\n", $stmt->error);
