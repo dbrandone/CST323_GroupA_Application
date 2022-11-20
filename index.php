@@ -13,6 +13,8 @@ $log->pushHandler(new StreamHandler(_DIR_ . '/CST323GroupAEmployeeApplication.lo
 $log->notice($message);
 error_log("<script>console.log('made it to the page');</script>");
 
+session_start();
+
 if($_SESSION["loggedin"] != true){
     $log->error('user was not logged in, rerout to login.php Auto login redirect. Attemted access to the index.php');
     error_log('user was not logged in, rerout to login.php Auto login redirect. Attempted access to the index.php' . $_SESSION);
