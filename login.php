@@ -54,7 +54,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
             $stmt->bind_param("s", $param_user_name);
-            error_log("<script>console.log('made it to the');</script>");
+            error_log('made it to the prepare');
             // Set parameters
             $param_user_name = $user_name;
             
@@ -78,27 +78,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["user_name"] = $user_name;                            
                             
                             // Redirect user to welcome page
+                            error_log('redirecting to the index with successful login');
                             header("location: index.php");
                             $log->info('The user was logged in successfully.');
                         } else{
                             // Password is not valid, display a generic error message
-                            printf("Error: %s.\n", $stmt->error);
+                            error_log(printf("Error: %s.\n", $stmt->error));
                             $login_err = "Password is incorrect.";
                             $log->error('The user could not be logged in because of an incorrect password.');
-                            echo("<script>console.log('The user could not be logged in because of an incorrect password.');</script>");
+                            error_log('The user could not be logged in because of an incorrect password.');
                         }
                     }
                 } else{
                     // Username doesn't exist, display a generic error message
                     $login_err = "Incorrect number of users.";
-                    printf("Error: %s.\n", $stmt->error);
+                    error_log(printf("Error: %s.\n", $stmt->error));
                     $log->error('The user could not be logged in because of an incorrect username.');
                     error_log("<script>console.log('The user could not be logged in because of an incorrect username.');</script>");
                 }
             } else{
-                printf("Error: %s.\n", $stmt->error);
+                error_log(printf("Error: %s.\n", $stmt->error));
                 echo "Oops! Something went wrong. Select query error.";
-                error_log("<script>console.log('Oops! Something went wrong. Select query error.');</script>");
+                error_log('Oops! Something went wrong. Select query error.');
             }
 
             // Close statement
