@@ -15,7 +15,7 @@ error_log("<script>console.log('made it to the page');</script>");
 
 if($_SESSION["loggedin"] != true){
     $log->error('user was not logged in, rerout to login.php Auto login redirect. Attemted access to the index.php');
-    echo("<script>console.log('user was not logged in, rerout to login.php Auto login redirect. Attempted access to the index.php');</script>");
+    error_log('user was not logged in, rerout to login.php Auto login redirect. Attempted access to the index.php' . $_SESSION);
     header("location: login.php");
     
 }
