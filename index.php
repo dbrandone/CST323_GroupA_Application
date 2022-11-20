@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set('America/Phoenix');
+/**date_default_timezone_set('America/Phoenix');
 
 
 require_once (dirname(_FILE_) . '/vendor/autoload.php');
@@ -9,7 +9,7 @@ use Monolog\Handler\StreamHandler;
 
 //create a log channel
 $log = new Logger('Lunaris_Admin');
-$log->pushHandler(new StreamHandler(_DIR_ . '/CST323GroupAEmployeeApplication.log', Logger::DEBUG));
+$log->pushHandler(new StreamHandler(_DIR_ . '/CST323GroupAEmployeeApplication.log', Logger::DEBUG));*/
 
 
 if($_SESSION["loggedin"] != true){
