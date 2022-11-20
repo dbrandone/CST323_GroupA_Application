@@ -85,6 +85,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             printf("Error: %s.\n", $stmt->error);
                             $login_err = "Password is incorrect.";
                             $log->error('The user could not be logged in because of an incorrect password.');
+                            echo("<script>console.log('The user could not be logged in because of an incorrect password.');</script>");
                         }
                     }
                 } else{
@@ -92,10 +93,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $login_err = "Incorrect number of users.";
                     printf("Error: %s.\n", $stmt->error);
                     $log->error('The user could not be logged in because of an incorrect username.');
+                    echo("<script>console.log('The user could not be logged in because of an incorrect username.');</script>");
                 }
             } else{
                 printf("Error: %s.\n", $stmt->error);
                 echo "Oops! Something went wrong. Select query error.";
+                echo("<script>console.log('Oops! Something went wrong. Select query error.');</script>");
             }
 
             // Close statement

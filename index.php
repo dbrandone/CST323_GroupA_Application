@@ -14,7 +14,8 @@ $log->notice($message);
 echo("<script>console.log('made it to the page');</script>");
 
 if($_SESSION["loggedin"] != true){
-    $log->error('user was not logged in, rerout to login.php Auto login redirect');
+    $log->error('user was not logged in, rerout to login.php Auto login redirect. Attemted access to the index.php');
+    echo("<script>console.log('user was not logged in, rerout to login.php Auto login redirect. Attempted access to the index.php');</script>");
     header("location: login.php");
     
 }
@@ -111,6 +112,7 @@ if($_SESSION["loggedin"] != true){
                             $result->free();
                         } else{
                             echo '<div class="alert alert-danger"><em>No records were found.</em></div>';
+                            echo("<script>console.log('No records were found.');</script>");
                         }
                     }else {
                         echo "Oops! Something went wrong. Please try again later.";
